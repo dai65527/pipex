@@ -1,0 +1,6 @@
+.*
+!.github
+!.gitignore
+*.a
+*.o
+*.out
