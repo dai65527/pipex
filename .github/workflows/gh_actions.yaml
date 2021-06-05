@@ -19,6 +19,6 @@
            python3 -m pip install --upgrade pip setuptools
            python3 -m pip install norminette
        - name: Run Norminette
-         run: norminette *.{.c,.h}
-       - name: Run Test
-         run: make test -C test
+         run: norminette
+      #  - name: Run Test
+      #    run: make test -C test
