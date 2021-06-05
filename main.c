@@ -6,11 +6,12 @@
 /*   By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/05 20:59:04 by dnakano           #+#    #+#             */
-/*   Updated: 2021/06/05 21:09:29 by dnakano          ###   ########.fr       */
+/*   Updated: 2021/06/05 21:44:09 by dnakano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
+#include <stdlib.h>
 	#include <unistd.h>
 	#include <sys/wait.h>
 #include "libft/libft.h"
@@ -18,20 +19,20 @@
 
 int	main(int argc, char **argv)
 {
-	int	fd_bkup[2];
+	int		fd_bkup[2];
+	pid_t	*pids;
 
 	if (!ppx_args_is_valid(argc, argv))
 	{
 		ft_putstr_fd("pipex: invalid argument\n", 2);
 		return (1);
 	}
+	pids = malloc(sizeof(pid_t) * (argc - 1));
 	ppx_backup_fd(fd_bkup);
-	ppx_readfromfile(argv[1]);
-	char buf[1024];
-	size_t len;
-	while ((len = read(0, buf, 1024)) > 0) {
-		write(1, buf, len);
-	}
+	pids[0] = ppx_readfromfile(argv[1]);
+	pids[argc - 1] = ppx_writetofile(argv[argc - 1]);
 	wait(NULL);
+	wait(NULL);
+	free(pids);
 	ppx_recovery_fd(fd_bkup);
 }

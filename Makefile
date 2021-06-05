@@ -16,7 +16,9 @@ LDFLAGS			=	-L$(LIBFTDIR) $(patsubst lib%,-l%,$(basename $(LIBFT)))
 SRCNAME			=	main.c \
 					ppx_args_is_valid.c \
 					ppx_fdhandler.c \
-					ppx_readfromfile.c
+					ppx_readfromfile.c \
+					ppx_writetofile.c \
+					ppx_utils.c
 SRCDIR			=	.
 SRCS			=	$(addprefix $(SRCDIR)/,$(SRCNAME))
 OBJS			=	$(SRCS:%.c=%.o)
@@ -49,7 +51,7 @@ clean:
 
 .PHONY:			fclean
 fclean:			clean
-				rm -f $(OUTPUTS)
+				rm -f $(OUTPUT)
 
 .PHONY:			re
 re:				fclean all

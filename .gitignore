@@ -1,6 +1,7 @@
 .*
 !.github
 !.gitignore
+pipex
 *.a
 *.o
 *.out
