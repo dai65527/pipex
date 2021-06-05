@@ -6,7 +6,7 @@
 /*   By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/05 21:42:48 by dnakano           #+#    #+#             */
-/*   Updated: 2021/06/05 22:54:30 by dnakano          ###   ########.fr       */
+/*   Updated: 2021/06/06 08:37:22 by dnakano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	writetofile_child(const char *filename)
 {
 	int	filefd;
 
-	filefd = open(filename, O_RDWR | O_CREAT, 0644);
+	filefd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (filefd == -1)
 		return (ppx_puterr(filename, 1));
 	if (ppx_readandwrite(0, filefd) == -1)
@@ -32,7 +32,7 @@ static int	writetofile_child(const char *filename)
 	return (0);
 }
 
-pid_t ppx_writetofile(const char *filename)
+pid_t	ppx_writetofile(const char *filename)
 {
 	pid_t	pid;
 

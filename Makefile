@@ -6,7 +6,7 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/21 08:47:29 by dnakano           #+#    #+#              #
-#    Updated: 2021/06/05 21:04:30 by dnakano          ###   ########.fr        #
+#    Updated: 2021/06/06 08:00:21 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRCNAME			=	main.c \
 					ppx_fdhandler.c \
 					ppx_readfromfile.c \
 					ppx_writetofile.c \
+					ppx_execcmd.c \
 					ppx_utils.c
 SRCDIR			=	.
 SRCS			=	$(addprefix $(SRCDIR)/,$(SRCNAME))

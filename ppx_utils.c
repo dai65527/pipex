@@ -6,7 +6,7 @@
 /*   By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/05 22:16:28 by dnakano           #+#    #+#             */
-/*   Updated: 2021/06/05 22:55:07 by dnakano          ###   ########.fr       */
+/*   Updated: 2021/06/06 08:37:10 by dnakano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,3 @@ int	ppx_readandwrite(int readfd, int writefd)
 			return (-1);
 	}
 }
-
