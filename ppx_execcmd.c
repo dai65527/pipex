@@ -6,7 +6,7 @@
 /*   By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/05 23:18:07 by dnakano           #+#    #+#             */
-/*   Updated: 2021/06/06 08:36:02 by dnakano          ###   ########.fr       */
+/*   Updated: 2021/06/06 08:52:33 by dnakano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,12 @@
 #include "libft/libft.h"
 #include "pipex.h"
 
-extern char	**environ;
-
 static void	freestrs(char **strs)
 {
 	char	**orig;
 
 	orig = strs;
-	while (strs != NULL)
+	while (*strs != NULL)
 	{
 		free(*strs);
 		strs++;
@@ -44,8 +42,9 @@ static int	findcmdpath(const char *cmd, char *path)
 
 static int	execcmd(const char *cmd)
 {
-	char	**argv;
-	char	path[PATH_MAX];
+	char		**argv;
+	char		path[PATH_MAX];
+	extern char	**environ;
 
 	argv = ft_split(cmd, ' ');
 	if (argv == NULL)

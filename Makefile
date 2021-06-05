@@ -6,7 +6,7 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/21 08:47:29 by dnakano           #+#    #+#              #
-#    Updated: 2021/06/06 08:00:21 by dnakano          ###   ########.fr        #
+#    Updated: 2021/06/06 08:55:25 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ OUTPUT			=	$(OUTPUTDIR)/$(NAME)
 .PHONY:			all
 all:			$(NAME)
 
-$(NAME):		$(OBJS) $(HEADERS) $(LIBFT)
+$(NAME):		$(LIBFT) $(OBJS) $(HEADERS)
 				$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $(OUTPUT)
 
 $(LIBFT):
@@ -48,10 +48,12 @@ $(LIBFT):
 
 .PHONY:			clean
 clean:
+				make fclean -C $(LIBFTDIR)
 				rm -f $(OBJS)
 
 .PHONY:			fclean
 fclean:			clean
+				make clean -C $(LIBFTDIR)
 				rm -f $(OUTPUT)
 
 .PHONY:			re

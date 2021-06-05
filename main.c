@@ -6,14 +6,14 @@
 /*   By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/05 20:59:04 by dnakano           #+#    #+#             */
-/*   Updated: 2021/06/06 08:31:21 by dnakano          ###   ########.fr       */
+/*   Updated: 2021/06/06 08:46:52 by dnakano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
 #include <stdlib.h>
-	#include <unistd.h>
-	#include <sys/wait.h>
+#include <unistd.h>
+#include <sys/wait.h>
 #include "libft/libft.h"
 #include "pipex.h"
 
