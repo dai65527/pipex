@@ -6,7 +6,7 @@
 /*   By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/05 23:18:07 by dnakano           #+#    #+#             */
-/*   Updated: 2021/06/06 08:52:33 by dnakano          ###   ########.fr       */
+/*   Updated: 2021/06/12 08:05:48 by dnakano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,21 +40,68 @@ static int	findcmdpath(const char *cmd, char *path)
 	return (0);
 }
 
+static char	**getpath(const char **envp)
+{
+	char	*path;
+
+	path = NULL;
+	while (*envp)
+	{
+		if (!ft_strncmp(*envp, "PATH=", 5))
+			return (ft_split(*envp + 5, ':'));
+		envp++;
+	}
+	return (ft_calloc(sizeof(char**), 1));
+}
+
+static int	exectryall(const char **argv)
+{
+	size_t		i;
+	extern char	**environ;
+	char		**paths;
+	char		fullpath[PATH_MAX + 1];
+
+	if (ft_strchr(argv[0], '/') != NULL &&
+		execve(argv[0], (char* const*)argv, (char* const*)environ) == -1)
+		return (ppx_puterr(argv[0], 1));
+	paths = getpath((const char**)environ);
+	if (paths == NULL)
+		return (ppx_puterr("malloc", 1));
+	i = 0;
+	while (paths[i] != NULL)
+	{
+		if (ft_strlcpy(fullpath, paths[i], PATH_MAX + 1) > PATH_MAX
+			|| ft_strlcat(fullpath, "/", PATH_MAX) > PATH_MAX
+			|| ft_strlcat(fullpath, argv[0], PATH_MAX) > PATH_MAX)
+		{
+			errno = ENAMETOOLONG;
+			freestrs(paths);
+			exit(ppx_puterr(argv[0], 1));
+			break;
+		}
+		// ft_putendl_fd(fullpath, 2);
+		execve(fullpath, (char* const*)argv, (char* const*)environ);
+		if (errno != ENOENT)
+			return ppx_puterr(NULL, 1);
+		i++;
+	}
+	return ppx_puterr(argv[0], 1);
+}
+
 static int	execcmd(const char *cmd)
 {
+	int			ret;
 	char		**argv;
 	char		path[PATH_MAX];
-	extern char	**environ;
 
 	argv = ft_split(cmd, ' ');
 	if (argv == NULL)
 		return (ppx_puterr("ft_split", 1));
-	if (findcmdpath(argv[0], path) == -1)
+	if (findcmdpath(argv[0], path) != 0)
 		return (ppx_puterr(argv[0], 1));
-	execve(argv[0], argv, environ);
-	ppx_puterr(argv[0], 1);
+	ret = exectryall((const char **)argv);
 	freestrs(argv);
-	return (1);
+	return (ret);
 }
 
 static int	execcmd_child(const char *cmd, int pipe_fd[2])
