@@ -19,6 +19,7 @@ SRCNAME			=	main.c \
 					ppx_readfromfile.c \
 					ppx_writetofile.c \
 					ppx_execcmd.c \
+					ppx_wait_children.c \
 					ppx_utils.c
 SRCDIR			=	.
 SRCS			=	$(addprefix $(SRCDIR)/,$(SRCNAME))
