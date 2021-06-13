@@ -20,5 +20,7 @@
            python3 -m pip install norminette
        - name: Run Norminette
          run: norminette
-      #  - name: Run Test
-      #    run: make test -C test
+       - name: Run Test
+         run: make test -C test
+       - name: Run Test Bonus
+         run: make testbonus -C test
