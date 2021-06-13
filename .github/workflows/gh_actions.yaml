@@ -21,6 +21,6 @@
        - name: Run Norminette
          run: norminette
        - name: Run Test
-         run: make test -C test
+         run: make test
        - name: Run Test Bonus
-         run: make testbonus -C test
+         run: make testbonus
