@@ -6,7 +6,7 @@
 /*   By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/05 22:16:28 by dnakano           #+#    #+#             */
-/*   Updated: 2021/06/12 08:01:24 by dnakano          ###   ########.fr       */
+/*   Updated: 2021/06/13 17:48:42 by dnakano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,19 @@
 #include "libft/libft.h"
 
 #define BUFFERSIZE 2048
+
+void	ppx_freestrs(char **strs)
+{
+	char	**orig;
+
+	orig = strs;
+	while (*strs != NULL)
+	{
+		free(*strs);
+		strs++;
+	}
+	free(orig);
+}
 
 int	ppx_puterr(const char *name, int ret)
 {

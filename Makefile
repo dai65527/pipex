@@ -6,7 +6,7 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/21 08:47:29 by dnakano           #+#    #+#              #
-#    Updated: 2021/06/13 14:49:03 by dnakano          ###   ########.fr        #
+#    Updated: 2021/06/13 17:46:30 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRCNAME			=	main.c \
 					ppx_readfromfile.c \
 					ppx_writetofile.c \
 					ppx_execcmd.c \
+					ppx_exectryall.c \
 					ppx_wait_children.c \
 					ppx_utils.c
 BONUSSRCNAME	=	main_bonus.c \
@@ -25,6 +26,7 @@ BONUSSRCNAME	=	main_bonus.c \
 					ppx_readfromfile.c \
 					ppx_writetofile.c \
 					ppx_execcmd.c \
+					ppx_exectryall.c \
 					ppx_wait_children.c \
 					ppx_utils.c
 SRCDIR			=	.
@@ -63,6 +65,10 @@ $(LIBFT):
 .PHONY:			test
 test:			$(NAME)
 				cd test && ./test.sh
+
+.PHONY:			testbonus
+testbonus:		bonus
+				cd test && ./test.sh bonus
 
 .PHONY:			clean
 clean:

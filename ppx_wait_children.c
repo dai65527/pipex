@@ -6,7 +6,7 @@
 /*   By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/12 09:06:57 by dnakano           #+#    #+#             */
-/*   Updated: 2021/06/13 16:36:30 by dnakano          ###   ########.fr       */
+/*   Updated: 2021/06/13 17:32:30 by dnakano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,5 @@ int	ppx_wait_children(pid_t *pids, size_t n)
 		}
 		cnt++;
 	}
-	return ret;
+	return (ret);
 }

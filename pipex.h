@@ -6,7 +6,7 @@
 /*   By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/05 16:55:32 by dnakano           #+#    #+#             */
-/*   Updated: 2021/06/12 09:18:57 by dnakano          ###   ########.fr       */
+/*   Updated: 2021/06/13 17:44:57 by dnakano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@ int		ppx_recovery_fd(int fd_bkup[2]);
 pid_t	ppx_readfromfile(const char *filename);
 pid_t	ppx_writetofile(const char *filename);
 pid_t	ppx_execcmd(const char *cmd);
+int		ppx_exectryall(const char **argv);
 int		ppx_wait_children(pid_t *pids, size_t n);
 
+void	ppx_freestrs(char **strs);
 int		ppx_puterr(const char *name, int ret);
 int		ppx_readandwrite(int inputfd, int writefd);
 

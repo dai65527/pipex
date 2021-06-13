@@ -335,7 +335,6 @@ else
     RETURNVAL=1
 fi
 
-# test bonus
 echo "CASE: case1.txt cat .. cat out.txt" | tee -a test.log
 < case1.txt cat | cat | cat | cat | cat | cat | cat | cat | cat | cat > out_ref.txt
 RET_REF=$?
@@ -354,6 +353,12 @@ if [ $? -eq 0 ]; then
 else
     echo "        diff KO:)" | tee -a test.log
     RETURNVAL=1
+fi
+
+if [ $RETURNVAL = 0 ]; then
+    echo "ALL TEST PASSED OK :)"
+else
+    echo "FAILED TEST KO :("
 fi
 
 exit $RETURNVAL
