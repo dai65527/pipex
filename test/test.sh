@@ -286,4 +286,74 @@ else
     echo "FAILED TEST KO :("
 fi
 
+if [ "$1" != "bonus" ]; then
+    exit $RETURNVAL
+fi
+
+echo
+echo "<< CHECK BONUS >>"
+make bonus -C .. > /dev/null
+
+# test bonus
+echo "CASE: case1.txt cat cat cat out.txt" | tee -a test.log
+< case1.txt cat | cat | cat > out_ref.txt
+RET_REF=$?
+../pipex case1.txt cat cat cat out_mine.txt
+RET_MINE=$?
+if [ $RET_REF = $RET_MINE ]; then
+    echo "  return val OK:)" | tee -a test.log
+else
+    echo "  return val KO:)" | tee -a test.log
+    echo "REF: $RET_REF, MINE: $RET_MINE" >> test.log
+    RETURNVAL=1
+fi
+diff out_ref.txt out_mine.txt >> test.log
+if [ $? -eq 0 ]; then
+    echo "        diff OK:)" | tee -a test.log
+else
+    echo "        diff KO:)" | tee -a test.log
+    RETURNVAL=1
+fi
+
+echo "CASE: case1.txt cat \"grep h\" \"grep s\" nc out.txt" | tee -a test.log
+< case1.txt cat | grep h | grep s | wc > out_ref.txt
+RET_REF=$?
+../pipex case1.txt cat "grep h" "grep s" wc out_mine.txt
+RET_MINE=$?
+if [ $RET_REF = $RET_MINE ]; then
+    echo "  return val OK:)" | tee -a test.log
+else
+    echo "  return val KO:)" | tee -a test.log
+    echo "REF: $RET_REF, MINE: $RET_MINE" >> test.log
+    RETURNVAL=1
+fi
+diff out_ref.txt out_mine.txt >> test.log
+if [ $? -eq 0 ]; then
+    echo "        diff OK:)" | tee -a test.log
+else
+    echo "        diff KO:)" | tee -a test.log
+    RETURNVAL=1
+fi
+
+# test bonus
+echo "CASE: case1.txt cat .. cat out.txt" | tee -a test.log
+< case1.txt cat | cat | cat | cat | cat | cat | cat | cat | cat | cat > out_ref.txt
+RET_REF=$?
+../pipex case1.txt cat cat cat cat cat cat cat cat cat cat out_mine.txt
+RET_MINE=$?
+if [ $RET_REF = $RET_MINE ]; then
+    echo "  return val OK:)" | tee -a test.log
+else
+    echo "  return val KO:)" | tee -a test.log
+    echo "REF: $RET_REF, MINE: $RET_MINE" >> test.log
+    RETURNVAL=1
+fi
+diff out_ref.txt out_mine.txt >> test.log
+if [ $? -eq 0 ]; then
+    echo "        diff OK:)" | tee -a test.log
+else
+    echo "        diff KO:)" | tee -a test.log
+    RETURNVAL=1
+fi
+
 exit $RETURNVAL
