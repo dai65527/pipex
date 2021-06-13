@@ -5,3 +5,5 @@ pipex
 *.a
 *.o
 *.out
+out*
+*.log
