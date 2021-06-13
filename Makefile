@@ -14,7 +14,6 @@ CC				=	gcc
 CFLAGS			=	-Wall -Werror -Wextra
 LDFLAGS			=	-L$(LIBFTDIR) $(patsubst lib%,-l%,$(basename $(LIBFT)))
 SRCNAME			=	main.c \
-					ppx_args_is_valid.c \
 					ppx_fdhandler.c \
 					ppx_readfromfile.c \
 					ppx_writetofile.c \
@@ -46,6 +45,10 @@ $(LIBFT):
 
 %.o:%.c
 				$(CC) $(CFLAGS) -c $< -o $@
+
+.PHONY:			test
+test:		$(NAME)
+			cd test && ./test.sh
 
 .PHONY:			clean
 clean:
