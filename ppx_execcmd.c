@@ -6,7 +6,7 @@
 /*   By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/05 23:18:07 by dnakano           #+#    #+#             */
-/*   Updated: 2021/06/12 08:05:48 by dnakano          ###   ########.fr       */
+/*   Updated: 2021/06/13 16:58:51 by dnakano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static int	exectryall(const char **argv)
 
 	if (ft_strchr(argv[0], '/') != NULL &&
 		execve(argv[0], (char* const*)argv, (char* const*)environ) == -1)
-		return (ppx_puterr(argv[0], 1));
+		return (ppx_puterr(argv[0], 127));
 	paths = getpath((const char**)environ);
 	if (paths == NULL)
 		return (ppx_puterr("malloc", 1));
@@ -85,7 +85,10 @@ static int	exectryall(const char **argv)
 			return ppx_puterr(NULL, 1);
 		i++;
 	}
-	return ppx_puterr(argv[0], 1);
+	ft_putstr_fd("pipex: ", 2);
+	ft_putstr_fd((char *)argv[0], 2);
+	ft_putendl_fd(": command not found", 2);
+	return (127);
 }
 
 static int	execcmd(const char *cmd)
